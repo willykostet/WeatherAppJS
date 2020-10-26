@@ -745,6 +745,14 @@
     cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
   };
 
+  Skycons.LIGHT_RAIN = function (ctx, t, color) {
+    var w = ctx.canvas.width,
+      h = ctx.canvas.height,
+      s = Math.min(w, h);
+
+    rain(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+    cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+  };
   Skycons.SLEET = function (ctx, t, color) {
     var w = ctx.canvas.width,
       h = ctx.canvas.height,
@@ -762,7 +770,30 @@
     snow(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
     cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
   };
+  Skycons.LIGHT_SNOW = function (ctx, t, color) {
+    var w = ctx.canvas.width,
+      h = ctx.canvas.height,
+      s = Math.min(w, h);
 
+    snow(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+    cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+  };
+  Skycons.LIGHT_SNOW_SHOWERS = function (ctx, t, color) {
+    var w = ctx.canvas.width,
+      h = ctx.canvas.height,
+      s = Math.min(w, h);
+
+    snow(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+    cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+  };
+  Skycons.LIGHT_SLEET_SHOWERS = function (ctx, t, color) {
+    var w = ctx.canvas.width,
+      h = ctx.canvas.height,
+      s = Math.min(w, h);
+
+    snow(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+    cloud(ctx, t, w * 0.5, h * 0.37, s * 0.9, s * STROKE, color);
+  };
   Skycons.WIND = function (ctx, t, color) {
     var w = ctx.canvas.width,
       h = ctx.canvas.height,
@@ -798,7 +829,32 @@
     line(ctx, a + w * 0.2 + k * 0.5, e, b + w * 0.8 - k * 0.5, e);
     line(ctx, c + w * 0.2 + k * 0.5, f, d + w * 0.8 - k * 0.5, f);
   };
+  Skycons.FOG = function (ctx, t, color) {
+    var w = ctx.canvas.width,
+      h = ctx.canvas.height,
+      s = Math.min(w, h),
+      k = s * STROKE;
 
+    fogbank(ctx, t, w * 0.5, h * 0.32, s * 0.75, k, color);
+
+    t /= 5000;
+
+    var a = Math.cos(t * TAU) * s * 0.02,
+      b = Math.cos((t + 0.25) * TAU) * s * 0.02,
+      c = Math.cos((t + 0.5) * TAU) * s * 0.02,
+      d = Math.cos((t + 0.75) * TAU) * s * 0.02,
+      n = h * 0.936,
+      e = Math.floor(n - k * 0.5) + 0.5,
+      f = Math.floor(n - k * 2.5) + 0.5;
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = k;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    line(ctx, a + w * 0.2 + k * 0.5, e, b + w * 0.8 - k * 0.5, e);
+    line(ctx, c + w * 0.2 + k * 0.5, f, d + w * 0.8 - k * 0.5, f);
+  };
   Skycons.prototype = {
     _determineDrawingFunction: function (draw) {
       if (typeof draw === "string")
